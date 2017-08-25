@@ -8,11 +8,11 @@ const config = require('../../../../config')
 class EmailController {
 
     constructor() {
-
+       this._emailSender = new EmailSender(config.get('emailConfig'))
     }
 
     sendEmail(req, res, next) {
-        new EmailSender(config.get('emailConfig'))
+        this._emailSender
             .send({
                 to: req.body.to,
                 subject: req.body.subject,

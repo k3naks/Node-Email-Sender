@@ -10,6 +10,7 @@ const router = express.Router()
 
 router.use(bodyParser.urlencoded({ extended: false }))
 
-router.route('/send').post(EmailValidator.getMailTemplate(), controller.sendEmail)
+router.route('/send')
+    .post(EmailValidator.getMailTemplate(), controller.sendEmail.bind(controller))
 
 module.exports = router
