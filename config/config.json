@@ -1,0 +1,9 @@
+{
+  "port" : 8081,
+  "emailConfig": {
+    "service": "Gmail",
+    "username": "shibeko.egor@gmail.com",
+    "password": "******",
+    "from": "Egor <shibeko.egor@google.com>"
+  }
+}
