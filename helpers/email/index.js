@@ -30,8 +30,8 @@ class EmailSender {
      * @param subject
      * @param body
      */
-    send({to, subject, body, callback}) {
-        let message = {to , subject, text: body}
+    send({to, subject, body, attachments, callback}) {
+        let message = {to , subject, attachments, text: body}
         this._transporter.sendMail(message, (error, info) => {
             if (error) {
                 if (callback) {
