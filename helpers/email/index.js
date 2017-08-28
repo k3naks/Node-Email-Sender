@@ -25,13 +25,16 @@ class EmailSender {
     }
 
     /**
-     * Send email
-     * @param to
-     * @param subject
-     * @param body
+     * Send Emails
+     * @param from from which email address mail will be sent
+     * @param to recipients
+     * @param subject subject of email
+     * @param body main text of the mail
+     * @param attachments list of attachments
+     * @param callback function that will be executed after sending mail if specified
      */
-    send({to, subject, body, attachments, callback}) {
-        let message = {to , subject, attachments, text: body}
+    send({from, to, subject, body, attachments, callback}) {
+        let message = {from, to, subject, attachments, text: body}
         this._transporter.sendMail(message, (error, info) => {
             if (error) {
                 if (callback) {
