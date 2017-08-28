@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer')
 const EmailSender = require('../../../../helpers/email')
 const config = require('../../../../config')
-const path = require('path')
 
 /**
  * @class EmailController
@@ -9,7 +8,7 @@ const path = require('path')
 class EmailController {
 
     constructor() {
-       this._emailSender = new EmailSender(config.get('emailConfig'))
+        this._emailSender = new EmailSender(config.get('emailConfig'))
     }
 
     sendEmail(req, res, next) {
@@ -18,9 +17,10 @@ class EmailController {
                 to: req.body.to,
                 subject: req.body.subject,
                 body: req.body.body,
-                attachments: req.files.map(function (file) {
-                    return {filename: file.originalname, path: path.join('uploads', file.filename)}
-                }),
+                attachments: req.files.map(file => ({
+                    filename: file.originalname,
+                    content: file.buffer
+                })),
                 callback: function (err, info) {
                     if (err) res.status(500).json({errorMessage: 'Error while sending email: ' + err.message})
                     res.send(info)

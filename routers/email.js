@@ -8,7 +8,7 @@ const multer  = require('multer')
 const {controller, EmailValidator} = require('../server/api-services/email')
 
 const router = express.Router()
-const upload = multer({ dest: 'uploads/' })
+const upload = multer()
 
 router.route('/send')
     .post(upload.array('attachments'), EmailValidator.getMailTemplate(), controller.sendEmail.bind(controller))
