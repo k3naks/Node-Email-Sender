@@ -13,19 +13,14 @@ class EmailController {
 
     sendEmail(req, res, next) {
         this._emailSender
-            .send({
-                to: req.body.to,
-                subject: req.body.subject,
-                body: req.body.body,
-                attachments: req.files.map(file => ({
-                    filename: file.originalname,
-                    content: file.buffer
-                })),
-                callback: function (err, info) {
-                    if (err) res.status(500).json({errorMessage: 'Error while sending email: ' + err.message})
-                    res.send(info)
-                }
+            .send(this._emailSender.formMessage(req))
+            .then(result => {
+                res.status(200).json({message: result})
             })
+            .catch(error => {
+                res.status(500).json({errorMessage: error.message})
+            })
+
     }
 
 }

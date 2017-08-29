@@ -26,31 +26,43 @@ class EmailSender {
 
     /**
      * Send Emails
-     * @param from from which email address mail will be sent
      * @param to recipients
      * @param subject subject of email
      * @param body main text of the mail
      * @param attachments list of attachments
-     * @param callback function that will be executed after sending mail if specified
      */
-    send({from, to, subject, body, attachments, callback}) {
-        let message = {from, to, subject, attachments, text: body}
-        this._transporter.sendMail(message, (error, info) => {
-            if (error) {
-                if (callback) {
-                    callback(error)
+    send({to, subject, body, attachments}) {
+        return new Promise((resolve, reject) => {
+            this._transporter.sendMail({to, subject, attachments, text: body}, (error, info) => {
+                if (error) {
+                    console.log('Error occurred')
+                    console.log(error.message)
+                    reject(new Error('Error occurred while sending email: ' + error.message))
+                } else {
+                    console.log('Message sent successfully!')
+                    console.log('Server responded with "%s"', info.response)
+                    resolve('Message has been sent.')
                 }
-                console.log('Error occurred');
-                console.log(error.message);
-                return;
-            }
-            console.log('Message sent successfully!');
-            console.log('Server responded with "%s"', info.response);
-            if (callback) {
-                callback(null, 'Message has been sent!')
-            }
-            this._transporter.close();
+            })
         })
+    }
+
+
+    /**
+     * Forms Email message object from HTTP Request
+     * @param req HTTP Request
+     * @returns {{to: (string), subject: (string), body: (string), attachments: Array}}
+     */
+    formMessage(req) {
+        return {
+            to: req.body.to,
+            subject: req.body.subject,
+            body: req.body.body,
+            attachments: req.files.map(file => ({
+                filename: file.originalname,
+                content: file.buffer
+            }))
+        }
     }
 
 }
