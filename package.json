@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine-node spec"
+    "test": "grunt test"
   },
   "dependencies": {
     "body-parser": "^1.17.1",

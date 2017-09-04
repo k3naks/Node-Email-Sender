@@ -4,7 +4,7 @@ const app = require('../../../../app');
 
 let base_url = "http://localhost:8081"
 
-describe("Testing Mail Sender", () => {
+describe("Testing Mail Sender Controller", () => {
 
     describe("POST /email/send", () => {
         it("checks success sending without attachments", done => {
