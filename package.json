@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-jasmine-nodejs": "^1.6.0"
+    "grunt-jasmine-nodejs": "^1.6.0",
+    "supertest": "^3.0.0"
   }
 }

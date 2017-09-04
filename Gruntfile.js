@@ -50,7 +50,7 @@ module.exports = function(grunt) {
                 },
                 // spec files
                 specs: [
-                    "server/api-services/email/test/emailControllerSpec.js"
+                    "server/api-services/email/test/emailControllerIntegrationSpec.js"
                 ]
             },
             emailSenderService: {

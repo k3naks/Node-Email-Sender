@@ -16,4 +16,6 @@ app.listen(8081, function () {
     console.log('Application listening on port ' + 8081)
 })
 
+module.exports = app
+
 
