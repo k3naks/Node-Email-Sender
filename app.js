@@ -12,10 +12,9 @@ app.use(function (err, req, res, next) {
     }
 })
 
-app.listen(8081, function () {
+module.exports = app.listen(8081, function () {
     console.log('Application listening on port ' + 8081)
 })
 
-module.exports = app
 
 
